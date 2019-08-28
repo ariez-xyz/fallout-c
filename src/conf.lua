@@ -4,8 +4,15 @@ function love.conf(t)
     winSizeMult=8                       -- scale factor
     winBorderless=true
 
-    -- size of assets
-    tileSize = 8
+    moveSpeed = 8
+
+    tileSize = 8                         -- size of assets - better don't change this without changing assets
+
+    -- controls
+    keyUp = 'w'
+    keyDown = 's'
+    keyLeft = 'a'
+    keyRight = 'd'
 
     t.identity = nil                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)
