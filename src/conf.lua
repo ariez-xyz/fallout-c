@@ -1,18 +1,20 @@
 function love.conf(t)
     -- graphics options
     winGridSize=12                      -- number of 8px tiles that window fits
-    winSizeMult=8                       -- scale factor
+    winSizeMult=4                       -- scale factor
     winBorderless=true
 
     moveSpeed = 8
 
-    tileSize = 8                         -- size of assets - better don't change this without changing assets
+    tileSize = 16                       -- size of assets - better don't change this without changing assets
 
     -- controls
     keyUp = 'w'
     keyDown = 's'
     keyLeft = 'a'
     keyRight = 'd'
+
+    overworldPath = "src/overworld_ph" -- overworld map file
 
     t.identity = nil                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)

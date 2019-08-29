@@ -1,32 +1,38 @@
-function drawmap()
-    tx0 = math.floor(mapX / tileRenderSize)
-    tx1 = math.floor((mapX + winWidth) / tileRenderSize)
-    ty0 = math.floor(mapY / tileRenderSize)
-    ty1 = math.floor((mapY + winHeight) / tileRenderSize)
+-- String.split()
+function split(s, sep)
+    local fields = {}
 
-    offsetX = mapX % tileRenderSize
-    offsetY = mapY % tileRenderSize
+    local sep = sep or " "
+    local pattern = string.format("([^%s]+)", sep)
+    string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
 
-    for x = tx0, tx1 do
-        for y = ty0, ty1 do
-            tile = getTile(x, y)
-
-            x = x % winGridSize - 1
-            y = y % winGridSize - 1
-
-            transform = love.math.newTransform(
-                x * tileRenderSize + offsetX,
-                y * tileRenderSize + offsetY,
-                0,
-                winSizeMult,
-                winSizeMult
-            )
-
-            love.graphics.draw(tile, transform)
-        end
-    end
+    return fields
 end
 
-function getTile(x, y)
-    return tiles["g"]
+-- see if the file exists
+function fileExists(file)
+    local f = io.open(file, "rb")
+    if f then f:close() end
+    return f ~= nil
+end
+  
+-- get all lines from a file, returns an empty 
+-- list/table if the file does not exist
+function readLines(file)
+    if not fileExists(file) then return {} end
+    lines = {}
+    for line in io.lines(file) do 
+        lines[#lines + 1] = line
+    end
+    return lines
+  end
+
+function printTable(t)
+    s = ""
+    prefix = ""
+    for k, v in pairs(t) do
+        s = s .. prefix .. v
+        prefix = ","
+    end
+    print(s)
 end
