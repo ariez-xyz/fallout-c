@@ -12,28 +12,54 @@ function drawmap()
     for x = 0, renderGridSize do
         for y = 0, renderGridSize do
             for _, layer in pairs(map) do
-                tile = getTile(tx + x, ty + y, layer)
+                tileid = getTileId(tx + x, ty + y, layer)
 
-                if tile ~= nil then
+                if tileid > FLAG_180_DEGREE then
+                    ox = tileSize
+                    oy = tileSize
+                    rotation = math.pi
+                    tileid = tileid - FLAG_180_DEGREE
+
+                elseif tileid > FLAG_90_DEGREE then
+                    ox = 0
+                    oy = tileSize
+                    rotation = math.pi / 2
+                    tileid = tileid - FLAG_90_DEGREE
+
+                elseif tileid > FLAG_270_DEGREE then
+                    ox = tileSize
+                    oy = 0
+                    rotation = 3 * math.pi / 2
+                    tileid = tileid - FLAG_270_DEGREE 
+
+                elseif tileid > FLAG_0_DEGREE then 
+                    rotation = 0
+                    ox = 0
+                    oy = 0
+                end
+
+                if tileid ~= UNKNOWN_TILE then
                     transform = love.math.newTransform(
                         x * tileRenderSize - offsetX,
                         y * tileRenderSize - offsetY,
-                        0,
+                        rotation,
                         winSizeMult,
-                        winSizeMult
+                        winSizeMult,
+                        ox,
+                        oy
                     )
 
-                    love.graphics.draw(spritesheet, tile, transform)
+                    love.graphics.draw(spritesheet, tiles[tileid], transform)
                 end
             end
         end
     end
 end
 
-function getTile(x, y, layer)
+function getTileId(x, y, layer)
     if 0 < x and x <= worldSizeX and 0 < y and y <= worldSizeY then
-        return tiles[layer[y][x]]
+        return layer[y][x]
     else
-        return nil
+        return UNKNOWN_TILE
     end
 end

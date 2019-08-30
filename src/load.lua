@@ -12,6 +12,15 @@ function love.load()
     mapX = 0
     mapY = 0
 
+    -- magic numbers
+
+    UNKNOWN_TILE = 0
+
+    FLAG_0_DEGREE = 0
+    FLAG_90_DEGREE = 2684354560 
+    FLAG_180_DEGREE = 3221225472 
+    FLAG_270_DEGREE = 1610612736 
+
     -- inferred constants
     renderGridSize = winGridSize - 1
 
