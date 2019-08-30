@@ -27,12 +27,18 @@ function readLines(file)
     return lines
   end
 
-function printTable(t)
+function printArray(t)
     s = ""
     prefix = ""
-    for k, v in pairs(t) do
+    for _, v in pairs(t) do
         s = s .. prefix .. v
         prefix = ","
     end
     print(s)
+end
+
+function printTable(t)
+    for k, v in pairs(t) do
+        print(k .. ":\t" .. tostring(v))
+    end
 end

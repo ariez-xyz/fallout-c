@@ -12,4 +12,3 @@ function love.update(dt)
         mapX = mapX - moveSpeed
     end
 end
-

@@ -1,20 +1,22 @@
 function love.conf(t)
-    -- graphics options
-    winGridSize=12                      -- number of 8px tiles that window fits
-    winSizeMult=4                       -- scale factor
-    winBorderless=true
-
-    moveSpeed = 8
-
-    tileSize = 16                       -- size of assets - better don't change this without changing assets
-
     -- controls
     keyUp = 'w'
     keyDown = 's'
     keyLeft = 'a'
     keyRight = 'd'
 
-    overworldPath = "src/overworld_ph" -- overworld map file
+    -- graphics options
+    winGridSize = 12                    -- number of 8px tiles that window fits
+    winSizeMult = 4                     -- scale factor
+    winBorderless = true                -- start in borderless
+
+    moveSpeed = 8
+
+    tileSize = 16                       -- size of assets - better don't change this without changing assets
+
+    overworldPath = "src/overworld"  -- overworld map file
+
+    textFont = "assets/Market_Deco.ttf"  -- base text font
 
     t.identity = nil                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)
@@ -28,9 +30,6 @@ function love.conf(t)
  
     t.window.title = "Untitled"         -- The window title (string)
     t.window.icon = nil                 -- Filepath to an image to use as the window's icon (string)
-    t.window.width = 800                -- The window width (number)
-    t.window.height = 600               -- The window height (number)
-    t.window.borderless = false         -- Remove all border visuals from the window (boolean)
     t.window.resizable = false          -- Let the window be user-resizable (boolean)
     t.window.minwidth = 1               -- Minimum window width if the window is resizable (number)
     t.window.minheight = 1              -- Minimum window height if the window is resizable (number)

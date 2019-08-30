@@ -23,7 +23,7 @@ function drawmap()
                         winSizeMult
                     )
 
-                    love.graphics.draw(tile, transform)
+                    love.graphics.draw(spritesheet, tile, transform)
                 end
             end
         end
@@ -32,7 +32,7 @@ end
 
 function getTile(x, y, layer)
     if 0 < x and x <= worldSizeX and 0 < y and y <= worldSizeY then
-        return tiles[tonumber(layer[y][x])]
+        return tiles[layer[y][x]]
     else
         return nil
     end

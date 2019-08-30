@@ -6,4 +6,3 @@ function love.keypressed(key, scancode, isrepeat)
         love.window.setMode(w, h, flags)
     end
 end
-
