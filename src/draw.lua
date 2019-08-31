@@ -3,52 +3,38 @@ function love.draw()
 end
 
 function drawmap()
-    tx = math.floor(mapX / tileRenderSize)
-    ty = math.floor(mapY / tileRenderSize)
+    -- (tx, ty) is the top left tile that needs to get drawn
+    local tx = math.floor(mapX / tileRenderSize)
+    local ty = math.floor(mapY / tileRenderSize)
 
-    offsetX = mapX % tileRenderSize
-    offsetY = mapY % tileRenderSize
+    -- draw offset used to enable smooth camera 
+    -- and to center image so tiles don't clip in
+    local offsetX = mapX % tileRenderSize - tileRenderSize / 2
+    local offsetY = mapY % tileRenderSize - tileRenderSize / 2
+
+    -- draw origin of tiles is at top left corner by default, this makes rotation difficult
+    -- this value is needed to center the origin which allows rotation
+    local originOffset = tileSize / 2
 
     for x = 0, renderGridSize do
         for y = 0, renderGridSize do
             for _, layer in pairs(map) do
-                tileid = getTileId(tx + x, ty + y, layer)
+                local tileid, rotation, sx, sy = getTileInfo(tx + x, ty + y, layer)
 
-                if tileid > FLAG_180_DEGREE then
-                    ox = tileSize
-                    oy = tileSize
-                    rotation = math.pi
-                    tileid = tileid - FLAG_180_DEGREE
+                transform = love.math.newTransform(
+                    x * tileRenderSize - offsetX,   -- x coord
+                    y * tileRenderSize - offsetY,   -- y coord
+                    rotation,
+                    winSizeMult * sx,            -- scale factor * mirroring factor
+                    winSizeMult * sy,            
+                    originOffset,
+                    originOffset 
+                )
 
-                elseif tileid > FLAG_90_DEGREE then
-                    ox = 0
-                    oy = tileSize
-                    rotation = math.pi / 2
-                    tileid = tileid - FLAG_90_DEGREE
-
-                elseif tileid > FLAG_270_DEGREE then
-                    ox = tileSize
-                    oy = 0
-                    rotation = 3 * math.pi / 2
-                    tileid = tileid - FLAG_270_DEGREE 
-
-                elseif tileid > FLAG_0_DEGREE then 
-                    rotation = 0
-                    ox = 0
-                    oy = 0
-                end
-
-                if tileid ~= UNKNOWN_TILE then
-                    transform = love.math.newTransform(
-                        x * tileRenderSize - offsetX,
-                        y * tileRenderSize - offsetY,
-                        rotation,
-                        winSizeMult,
-                        winSizeMult,
-                        ox,
-                        oy
-                    )
-
+                -- draw error sprite for unknown tiles/bullshit values
+                if tileid == UNKNOWN_TILE or tileid >= #tiles then
+                    love.graphics.draw(missingSprite, transform)
+                elseif tileid ~= TRANSPARENT_TILE then
                     love.graphics.draw(spritesheet, tiles[tileid], transform)
                 end
             end
@@ -56,10 +42,33 @@ function drawmap()
     end
 end
 
-function getTileId(x, y, layer)
+function getTileInfo(x, y, layer)
+    local tileid
+    local rotation = 0
+    local sx = 1
+    local sy = 1
+
     if 0 < x and x <= worldSizeX and 0 < y and y <= worldSizeY then
-        return layer[y][x]
+        tileid = layer[y][x]
+
+        if checkFlag(DMIRROR_FLAG, tileid) then
+            sx = sx * -1
+            rotation = math.pi / 2
+            tileid = clearFlag(DMIRROR_FLAG, tileid)
+        end
+
+        if checkFlag(HMIRROR_FLAG, tileid) then
+            sx = sx * -1
+            tileid = clearFlag(HMIRROR_FLAG, tileid)
+        end
+
+        if checkFlag(VMIRROR_FLAG, tileid) then
+            sy = sy * -1
+            tileid = clearFlag(VMIRROR_FLAG, tileid)
+        end
     else
-        return UNKNOWN_TILE
+        tileid = UNKNOWN_TILE
     end
+
+    return tileid, rotation, sx, sy
 end

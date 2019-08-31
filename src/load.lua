@@ -1,5 +1,7 @@
 function love.load()
-    -- global variables
+    ----------------------
+    -- global variables --
+    ----------------------
     map = {}
     tiles = {}
     actors = {}
@@ -12,16 +14,19 @@ function love.load()
     mapX = 0
     mapY = 0
 
-    -- magic numbers
+    -------------------
+    -- magic numbers --
+    -------------------
+    TRANSPARENT_TILE = 0 -- probably better not to change as this is used by Tiled
+    UNKNOWN_TILE = -1 -- used when screen scrolls out of bounds etc., drawn as transparent
 
-    UNKNOWN_TILE = 0
+    DMIRROR_FLAG = 29
+    VMIRROR_FLAG = 30
+    HMIRROR_FLAG = 31
 
-    FLAG_0_DEGREE = 0
-    FLAG_90_DEGREE = 2684354560 
-    FLAG_180_DEGREE = 3221225472 
-    FLAG_270_DEGREE = 1610612736 
-
-    -- inferred constants
+    ------------------------
+    -- inferred constants --
+    ------------------------
     renderGridSize = winGridSize - 1
 
     winBaseSize = renderGridSize * tileSize -- tiles are 8px
@@ -30,13 +35,19 @@ function love.load()
 
     tileRenderSize = tileSize * winSizeMult
 
-    -- setup
+    -----------
+    -- setup --
+    -----------
     love.graphics.setDefaultFilter("nearest", "nearest", 16)
     love.window.setMode(winBaseSize * winSizeMult, winBaseSize * winSizeMult, { borderless = winBorderless })
     love.keyboard.setKeyRepeat(true)
 
-
+    ------------
+    -- assets --
+    ------------
     loadMap(overworldPath)
+
+    missingSprite = love.graphics.newImage("assets/missingsprite.png")
 
     textFont = love.graphics.newFont(textFont, 48)
 end

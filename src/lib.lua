@@ -1,3 +1,5 @@
+local bit = require("bit")
+
 -- String.split()
 function split(s, sep)
     local fields = {}
@@ -41,4 +43,14 @@ function printTable(t)
     for k, v in pairs(t) do
         print(k .. ":\t" .. tostring(v))
     end
+end
+
+function checkFlag(index, val)
+    -- math.abs is needed because for index=30, calling bit.band with values > 2^31
+    -- returns -2^31. bit returns *signed* numbers and is limited to 32bits of precision.
+    return math.abs(bit.band(2 ^ index, val)) == 2 ^ index
+end
+
+function clearFlag(index, val)
+    return bit.band(bit.bnot(2 ^ index), val)
 end
