@@ -46,11 +46,27 @@ function printTable(t)
 end
 
 function checkFlag(index, val)
-    -- math.abs is needed because for index=30, calling bit.band with values > 2^31
+    -- math.abs is needed because with index=30, val> 2^31 the call to bit.band
     -- returns -2^31. bit returns *signed* numbers and is limited to 32bits of precision.
+    -- do not ask how long this took to figure out
     return math.abs(bit.band(2 ^ index, val)) == 2 ^ index
 end
 
 function clearFlag(index, val)
     return bit.band(bit.bnot(2 ^ index), val)
+end
+
+function assert(bool, str)
+    if bool == false then
+        print(str)
+        exitGame()
+    end
+end
+
+function len(table)
+    local len = 0
+    for _ in pairs(table) do
+        len = len + 1
+    end
+    return len
 end

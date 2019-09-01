@@ -4,13 +4,13 @@ end
 
 function drawmap()
     -- (tx, ty) is the top left tile that needs to get drawn
-    local tx = math.floor(mapX / tileRenderSize)
-    local ty = math.floor(mapY / tileRenderSize)
+    local tx = math.floor(cameraX / tileRenderSize)
+    local ty = math.floor(cameraY / tileRenderSize)
 
     -- draw offset used to enable smooth camera 
     -- and to center image so tiles don't clip in
-    local offsetX = mapX % tileRenderSize - tileRenderSize / 2
-    local offsetY = mapY % tileRenderSize - tileRenderSize / 2
+    local offsetX = cameraX % tileRenderSize - tileRenderSize / 2
+    local offsetY = cameraY % tileRenderSize - tileRenderSize / 2
 
     -- draw origin of tiles is at top left corner by default, this makes rotation difficult
     -- this value is needed to center the origin which allows rotation
@@ -33,7 +33,7 @@ function drawmap()
 
                 -- draw error sprite for unknown tiles/bullshit values
                 if tileid == UNKNOWN_TILE or tileid >= #tiles then
-                    love.graphics.draw(missingSprite, transform)
+                    love.graphics.draw(fw.missingSprite, transform)
                 elseif tileid ~= TRANSPARENT_TILE then
                     love.graphics.draw(spritesheet, tiles[tileid], transform)
                 end

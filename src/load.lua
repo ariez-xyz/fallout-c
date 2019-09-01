@@ -11,8 +11,8 @@ function love.load()
     worldSizeX = 0
     worldSizeY = 0
 
-    mapX = 0
-    mapY = 0
+    cameraX = 0
+    cameraY = 0
 
     -------------------
     -- magic numbers --
@@ -47,9 +47,13 @@ function love.load()
     ------------
     loadMap(overworldPath)
 
-    missingSprite = love.graphics.newImage("assets/missingsprite.png")
-
     textFont = love.graphics.newFont(textFont, 48)
+
+    if fw == nil then fw = {} end
+    fw.missingSprite = love.graphics.newImage("assets/missingsprite.png")
+    fw.nullSprite = love.graphics.newText(textFont)
+
+    testActor = newActor("brah")
 end
 
 function loadMap(path, entryX, entryY)
@@ -86,6 +90,6 @@ function loadMap(path, entryX, entryY)
     worldSizeY = #map[1][1]
 
     -- set entry point of map
-    mapX = (entryX or tiledMap.properties.entryX or 0) * tileRenderSize
-    mapY = (entryY or tiledMap.properties.entryY or 0) * tileRenderSize
+    cameraX = (entryX or tiledMap.properties.entryX or 0) * tileRenderSize
+    cameraY = (entryY or tiledMap.properties.entryY or 0) * tileRenderSize
 end
