@@ -12,11 +12,11 @@ function love.update(dt)
         cameraX = cameraX - moveSpeed
     end
 
-    updateActors(dt)
+    updateObjects(dt)
 end
 
-function updateActors(dt)
-    for _, v in pairs(actors) do
-        v:update(dt)
+function updateObjects(dt)
+    for _, object in pairs(objects) do
+        object:update(dt)
     end
 end

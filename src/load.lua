@@ -4,7 +4,8 @@ function love.load()
     ----------------------
     map = {}
     tiles = {}
-    actors = {}
+    objects = {}
+    drawBuffer = {}
 
     spritesheet = 0
 
@@ -61,17 +62,21 @@ function loadMap(path, entryX, entryY)
 
     -- parse map data
     for k, layer in pairs(tiledMap.layers) do
-        local data = {}
-        local pos = 1
-        for i = 1, layer.height do
-            local datarow = {}
-            for j = 1, layer.width do
-                table.insert(datarow, layer.data[pos])
-                pos = pos + 1
+        if layer.type == "tilelayer" then
+            local data = {}
+            local pos = 1
+            for i = 1, layer.height do
+                local datarow = {}
+                for j = 1, layer.width do
+                    table.insert(datarow, layer.data[pos])
+                    pos = pos + 1
+                end
+                table.insert(data, datarow)
             end
-            table.insert(data, datarow)
+            table.insert(map, data)
+        elseif layer.type == "objectgroup" then
+            print("object groups not supported! ignoring...")
         end
-        table.insert(map, data)
     end
     
     -- parse tileset

@@ -46,7 +46,7 @@ function printTable(t)
 end
 
 function checkFlag(index, val)
-    -- math.abs is needed because with index=30, val> 2^31 the call to bit.band
+    -- math.abs is needed because with index=30, val >= 2^31 the call to bit.band
     -- returns -2^31. bit returns *signed* numbers and is limited to 32bits of precision.
     -- do not ask how long this took to figure out
     return math.abs(bit.band(2 ^ index, val)) == 2 ^ index

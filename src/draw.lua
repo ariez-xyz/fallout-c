@@ -1,8 +1,18 @@
 function love.draw()
-    drawmap()
+    drawMap()
+
+    emptyDrawBuffer()
 end
 
-function drawmap()
+function emptyDrawBuffer()
+    for _, a in pairs(drawBuffer) do
+        love.graphics.draw(a.sprite, a.posX, a.posY, a.rotation, a.sx, a.sy, a.ox, a.oy)
+    end
+
+    drawBuffer = {}
+end
+
+function drawMap()
     -- (tx, ty) is the top left tile that needs to get drawn
     local tx = math.floor(cameraX / tileRenderSize)
     local ty = math.floor(cameraY / tileRenderSize)
