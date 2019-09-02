@@ -1,41 +1,4 @@
 function love.load()
-    ----------------------
-    -- global variables --
-    ----------------------
-    map = {}
-    tiles = {}
-    objects = {}
-    drawBuffer = {}
-
-    spritesheet = 0
-
-    worldSizeX = 0
-    worldSizeY = 0
-
-    cameraX = 0
-    cameraY = 0
-
-    -------------------
-    -- magic numbers --
-    -------------------
-    TRANSPARENT_TILE = 0 -- probably better not to change as this is used by Tiled
-    UNKNOWN_TILE = -1 -- used when screen scrolls out of bounds etc., drawn as transparent
-
-    DMIRROR_FLAG = 29
-    VMIRROR_FLAG = 30
-    HMIRROR_FLAG = 31
-
-    ------------------------
-    -- inferred constants --
-    ------------------------
-    renderGridSize = winGridSize - 1
-
-    winBaseSize = renderGridSize * tileSize -- tiles are 8px
-    winWidth = winBaseSize * winSizeMult
-    winHeight = winBaseSize * winSizeMult
-
-    tileRenderSize = tileSize * winSizeMult
-
     -----------
     -- setup --
     -----------
@@ -95,6 +58,6 @@ function loadMap(path, entryX, entryY)
     worldSizeY = #map[1][1]
 
     -- set entry point of map
-    cameraX = (entryX or tiledMap.properties.entryX or 0) * tileRenderSize
-    cameraY = (entryY or tiledMap.properties.entryY or 0) * tileRenderSize
+    player.x = (entryX or tiledMap.properties.entryX or 0) * tileRenderSize
+    player.y = (entryY or tiledMap.properties.entryY or 0) * tileRenderSize
 end

@@ -12,20 +12,20 @@ function newActor(actorName)
         name = actorName or "",
 
         -- allows actors to have state/ai
-        controllers = {}
+        controllers = {},
+
+        update = function(self, dt)
+            for _, controller in pairs(self.controllers) do
+                controller:update(dt, self)
+            end
+        end,
+
+        process = function(self, eventid)
+            for _, controller in pairs(self.controllers) do
+                controller:process(eventid, self)
+            end
+        end,
     }
-
-    function a:update(dt)
-        for _, controller in pairs(self.controllers) do
-            controller:update(dt, self)
-        end
-    end
-
-    function a:process(event)
-        for _, controller in pairs(self.controllers) do
-            controller:process(event, self)
-        end
-    end
 
     -- this gives implicit actor id.
     table.insert(objects, a)
