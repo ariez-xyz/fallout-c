@@ -10,14 +10,6 @@ function love.conf(t)
     winSizeMult = 4                     -- scale factor
     winBorderless = true                -- start in borderless
 
-    moveSpeed = 8
-
-    tileSize = 16                       -- size of assets - better don't change this without changing assets
-
-    overworldPath = "src/overworld"  -- overworld map file
-
-    textFont = "assets/Market_Deco.ttf"  -- base text font
-
     t.identity = nil                    -- The name of the save directory (string)
     t.appendidentity = false            -- Search files in source directory before save directory (boolean)
     t.version = "11.2"                  -- The LÖVE version this game was made for (string)

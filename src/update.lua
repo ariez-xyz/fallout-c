@@ -1,15 +1,15 @@
 function love.update(dt)
     if love.keyboard.isDown(keyUp) then
-        processEvent(events.UP_BUTTON_PUSHED)
+        emitEvent(events.UP_BUTTON_PUSHED)
     end
     if love.keyboard.isDown(keyDown) then
-        processEvent(events.DOWN_BUTTON_PUSHED)
+        emitEvent(events.DOWN_BUTTON_PUSHED)
     end
     if love.keyboard.isDown(keyRight) then
-        processEvent(events.RIGHT_BUTTON_PUSHED)
+        emitEvent(events.RIGHT_BUTTON_PUSHED)
     end
     if love.keyboard.isDown(keyLeft) then
-        processEvent(events.LEFT_BUTTON_PUSHED)
+        emitEvent(events.LEFT_BUTTON_PUSHED)
     end
 
     updateObjects(dt)
@@ -21,9 +21,9 @@ function updateObjects(dt)
     end
 end
 
-function processEvent(eventid)
+function emitEvent(eventid)
     -- currently, every object gets notified of every event. 
-    -- TODO: use inverse index and have objects subscribe
+    -- TODO: use inverse index and have objects subscribe. also, buffer events
     for _, object in pairs(objects) do
         object:process(eventid)
     end

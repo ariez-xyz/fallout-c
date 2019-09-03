@@ -60,4 +60,6 @@ function loadMap(path, entryX, entryY)
     -- set entry point of map
     player.x = (entryX or tiledMap.properties.entryX or 0) * tileRenderSize
     player.y = (entryY or tiledMap.properties.entryY or 0) * tileRenderSize
+
+    emitEvent(MAP_LOADED)
 end

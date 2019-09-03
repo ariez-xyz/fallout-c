@@ -14,6 +14,14 @@ worldSizeY = 0
 cameraX = 0
 cameraY = 0
 
+moveSpeed = 16
+
+tileSize = 16                       -- size of assets - better don't change this without changing assets
+
+overworldPath = "src/overworld"     -- overworld map file
+
+textFont = "assets/Market_Deco.ttf" -- base text font
+
 -------------------
 -- magic numbers --
 -------------------
@@ -40,4 +48,3 @@ winWidth = winBaseSize * winSizeMult
 winHeight = winBaseSize * winSizeMult
 
 tileRenderSize = tileSize * winSizeMult
-

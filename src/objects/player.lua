@@ -6,11 +6,7 @@ p.y = cameraY
 
 p.controllers = {
     love.filesystem.load("controllers/controlable.lua")(),
-    newController({
-        update = function(self, dt, object) 
-            cameraX = object.x; cameraY = object.y 
-        end
-    })
+    love.filesystem.load("controllers/cameraController.lua")(),
 }
 
 return p

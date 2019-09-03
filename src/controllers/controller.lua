@@ -1,11 +1,11 @@
 -- basically a FSM with memory and an update function called from the game loop
--- that is constructed from a list of states, but can also be stateless or merely
--- a data object
+-- that is constructed from a list of states, but can also be stateless
 
 -- state interface (none are required):
     -- state:enter(prevState, object) - called upon entering state
     -- state:update(dt, object) - called if state is currently active
     -- state:process(eventid, object) - called if state is currently active
+-- update and process may return another sstate to transition to
 
 -- states can be controllers because the state interface is a subset of the controller
 -- interface! implementing generalized transitions in the controller-state's 

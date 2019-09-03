@@ -58,6 +58,7 @@ function getTileInfo(x, y, layer)
     local sx = 1
     local sy = 1
 
+    -- world bounds check
     if 0 < x and x <= worldSizeX and 0 < y and y <= worldSizeY then
         tileid = layer[y][x]
 
@@ -77,7 +78,7 @@ function getTileInfo(x, y, layer)
             tileid = clearFlag(VMIRROR_FLAG, tileid)
         end
     else
-        tileid = UNKNOWN_TILE
+        tileid = TRANSPARENT_TILE
     end
 
     return tileid, rotation, sx, sy

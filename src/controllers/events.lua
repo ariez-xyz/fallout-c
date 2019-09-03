@@ -6,4 +6,5 @@ return {
     UP_BUTTON_PUSHED = counter:incAndGet(),
     LEFT_BUTTON_PUSHED = counter:incAndGet(),
     RIGHT_BUTTON_PUSHED = counter:incAndGet(),
+    MAP_LOADED = counter:incAndGet(),
 }
