@@ -43,7 +43,7 @@ function drawMap()
 
                 -- draw error sprite for unknown tiles/bullshit values
                 if tileid == UNKNOWN_TILE or tileid >= #tiles then
-                    love.graphics.draw(fw.missingSprite, transform)
+                    love.graphics.draw(flyweights.missingSprite, transform)
                 elseif tileid ~= TRANSPARENT_TILE then
                     love.graphics.draw(spritesheet, tiles[tileid], transform)
                 end

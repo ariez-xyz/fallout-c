@@ -13,11 +13,10 @@ function love.load()
 
     textFont = love.graphics.newFont(textFont, 48)
 
-    if fw == nil then fw = {} end
-    fw.missingSprite = love.graphics.newImage("assets/missingsprite.png")
-    fw.nullSprite = love.graphics.newText(textFont)
-
-    testActor = newActor("brah")
+    flyweights = {
+        missingSprite = love.graphics.newImage("assets/missingsprite.png"),
+        nullSprite = love.graphics.newText(textFont)
+    }
 end
 
 function loadMap(path, entryX, entryY)

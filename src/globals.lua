@@ -14,7 +14,7 @@ worldSizeY = 0
 cameraX = 0
 cameraY = 0
 
-moveSpeed = 16
+moveSpeed = 500
 
 tileSize = 16                       -- size of assets - better don't change this without changing assets
 

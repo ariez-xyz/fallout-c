@@ -1,12 +1,13 @@
-local p = newActor("player")
+local p = newObject("player")
 
--- TODO this is tightly coupled - add data table to each actor maybe?
-p.x = cameraX
-p.y = cameraY
+p.data.coords = {
+    x = cameraX,
+    y = cameraY,
+}
 
 p.controllers = {
-    love.filesystem.load("controllers/controlable.lua")(),
-    love.filesystem.load("controllers/cameraController.lua")(),
+    love.filesystem.load("controllers/controlable.lua")(p.data.coords),
+    love.filesystem.load("controllers/cameraController.lua")(p.data.coords),
 }
 
 return p

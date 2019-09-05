@@ -1,13 +1,15 @@
 -- Disclaimer: I am reading about design patterns as I'm writing this
--- so maybe that explains why this is so overly complicated. 
+-- so maybe that explains why this is so weird
 -- here's to hoping it pays off
 
-function newActor(actorName)
-    a = {
-        name = actorName or "",
+function newObject(objectName)
+    o = {
+        name = objectName or "unnamed",
 
         -- gives actors life
         controllers = {},
+
+        data = {},
 
         update = function(self, dt)
             for _, controller in pairs(self.controllers) do
@@ -23,6 +25,6 @@ function newActor(actorName)
     }
 
     -- this gives implicit actor id.
-    table.insert(objects, a)
-    return a
+    table.insert(objects, o)
+    return o
 end
