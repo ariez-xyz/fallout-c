@@ -17,7 +17,7 @@ function drawMap()
     local tx = math.floor(cameraX / tileRenderSize)
     local ty = math.floor(cameraY / tileRenderSize)
 
-    -- draw offset used to enable smooth camera 
+    -- draw offset is required so camera isnt locked to tile grid
     -- and to center image so tiles don't clip in
     local offsetX = cameraX % tileRenderSize - tileRenderSize / 2
     local offsetY = cameraY % tileRenderSize - tileRenderSize / 2
