@@ -28,7 +28,6 @@ return {
         self.timer = self.timer + dt
 
         self.fadeAlpha = math.max(0, 1 - math.max(0, self.timer - self.fadeoutBegin) / (self.fadeoutEnd - self.fadeoutBegin))
-        print(self.fadeAlpha)
 
         if self.timer > self.timeout then
             transitionGameState(self, mainGameState)

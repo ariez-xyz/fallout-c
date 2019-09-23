@@ -56,13 +56,6 @@ function clearFlag(index, val)
     return bit.band(bit.bnot(2 ^ index), val)
 end
 
-function assert(bool, str)
-    if bool == false then
-        print(str)
-        exitGame()
-    end
-end
-
 function len(table)
     local len = 0
     for _ in pairs(table) do
