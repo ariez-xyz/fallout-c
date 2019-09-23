@@ -1,8 +1,8 @@
 local p = newObject("player")
 
 p.data.coords = {
-    x = cameraX,
-    y = cameraY,
+    x = 500,
+    y = 500,
 }
 
 p.controllers = {

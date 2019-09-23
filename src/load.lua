@@ -11,12 +11,12 @@ function love.load()
     ------------
     loadMap("src/overworld")
 
-    titleFont = love.graphics.newFont("Air Americana.ttf", 128) -- base text font
-
     flyweights = {
         missingSprite = love.graphics.newImage("assets/missingsprite.png"),
-        nullSprite = love.graphics.newText(titleFont)
     }
+
+    -- start the game
+    transitionGameState({}, splash)
 end
 
 function loadMap(path, entryX, entryY)

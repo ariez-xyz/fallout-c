@@ -71,6 +71,10 @@ function len(table)
     return len
 end
 
+function math.max(x, y)
+    return x > y and x or y
+end
+
 function math.sgn(x)
     return
         x > 0 and 1 or
