@@ -9,18 +9,18 @@ function love.load()
     ------------
     -- assets --
     ------------
-    loadMap(overworldPath)
+    loadMap("src/overworld")
 
-    textFont = love.graphics.newFont(textFont, 48)
+    titleFont = love.graphics.newFont("Air Americana.ttf", 128) -- base text font
 
     flyweights = {
         missingSprite = love.graphics.newImage("assets/missingsprite.png"),
-        nullSprite = love.graphics.newText(textFont)
+        nullSprite = love.graphics.newText(titleFont)
     }
 end
 
 function loadMap(path, entryX, entryY)
-    local tiledMap = require(overworldPath) 
+    local tiledMap = require(path) 
 
     -- parse map data
     for k, layer in pairs(tiledMap.layers) do

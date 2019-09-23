@@ -18,10 +18,6 @@ moveSpeed = 500
 
 tileSize = 16                       -- size of assets - better don't change this without changing assets
 
-overworldPath = "src/overworld"     -- overworld map file
-
-textFont = "assets/Market_Deco.ttf" -- base text font
-
 -------------------
 -- magic numbers --
 -------------------

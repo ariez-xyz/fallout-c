@@ -77,3 +77,14 @@ function math.sgn(x)
         x == 0 and 0 or
         -1
 end
+
+function joinTables(...)
+    local s = {}
+    for _, t in ipairs{...} do
+        for k, v in pairs(t) do
+            assert(s[k] == nil, "key collision in joinTables (key: " .. k .. ")")
+            s[k] = v
+        end
+    end
+    return s
+end
