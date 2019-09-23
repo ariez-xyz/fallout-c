@@ -9,7 +9,7 @@ function love.load()
     ------------
     -- assets --
     ------------
-    loadMap("src/overworld")
+    loadMap("overworld")
 
     flyweights = {
         missingSprite = love.graphics.newImage("assets/missingsprite.png"),
