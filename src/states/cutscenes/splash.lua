@@ -11,17 +11,16 @@ return {
 
         self.titleFont = love.graphics.newFont("Air Americana.ttf", fontSize)
 
-        -- upper x, upper y, lower x, lower y of logo text box (not logo!)
-        self.ux = 0
-        self.uy = (height - fontSize) / 2
-        self.lx = width
-        self.ly = self.uy + fontSize
+        -- bounding box of logo text (height given by font size)
+        self.x = 0
+        self.y = (height - fontSize) / 2
+        self.length = width
     end,
 
     draw = function(self)
         love.graphics.clear(love.graphics.getBackgroundColor())
         love.graphics.setFont(self.titleFont)
-        love.graphics.printf({{255, 255, 255, self.fadeAlpha}, "Fallout-C"}, self.ux, self.uy, self.lx, "center")
+        love.graphics.printf({{255, 255, 255, self.fadeAlpha}, "Fallout-C"}, self.x, self.y, self.length, "center")
     end,
 
     update = function(self, dt)

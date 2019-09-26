@@ -30,26 +30,32 @@ return {
         -- this value is needed to center the origin which allows rotation
         local originOffset = tileSize / 2
 
-        for x = 0, renderGridSize do
-            for y = 0, renderGridSize do
-                for _, layer in pairs(map) do
+        for _, layer in pairs(map) do
+            for x = 0, renderGridSize do
+                for y = 0, renderGridSize do
                     local tileid, rotation, sx, sy = self:getTileInfo(tx + x, ty + y, layer)
 
                     transform = love.math.newTransform(
                         x * tileRenderSize - offsetX,   -- x coord
                         y * tileRenderSize - offsetY,   -- y coord
                         rotation,
-                        winSizeMult * sx,            -- scale factor * mirroring factor
+                        winSizeMult * sx,            -- scale factor * mirroring factor (sx = -1 or 1)
                         winSizeMult * sy,            
                         originOffset,
                         originOffset 
                     )
 
                     -- draw error sprite for unknown tiles/bullshit values
-                    if tileid == UNKNOWN_TILE or tileid >= #tiles then
+                    if tileid == UNKNOWN_TILE or tileid >= #sprites then
                         love.graphics.draw(flyweights.missingSprite, transform)
+
+                    -- if tile is in a spritesheet
+                    elseif quads[tileid] then
+                        love.graphics.draw(sprites[tileid], quads[tileid], transform)
+
+                    -- if its just a single sprite
                     elseif tileid ~= TRANSPARENT_TILE then
-                        love.graphics.draw(spritesheet, tiles[tileid], transform)
+                        love.graphics.draw(sprites[tileid], transform)
                     end
                 end
             end

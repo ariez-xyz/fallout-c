@@ -2,17 +2,16 @@
 -- global variables --
 ----------------------
 map = {}
-tiles = {}
+quads = {}
+sprites = {}
 objects = {}
 drawBuffer = {}
 
-spritesheet = 0
+worldSizeX = nil
+worldSizeY = nil
 
-worldSizeX = 0
-worldSizeY = 0
-
-cameraX = 0
-cameraY = 0
+cameraX = nil
+cameraY = nil
 
 moveSpeed = 500
 

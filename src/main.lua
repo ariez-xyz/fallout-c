@@ -46,7 +46,6 @@ function love.run()
 		-- Update dt, as we'll be passing it to update
 		if love.timer then dt = love.timer.step() end
  
-
 		-- Call current state's update and draw
         if currentGameState.update then
             currentGameState:update(dt) 

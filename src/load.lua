@@ -19,6 +19,7 @@ function love.load()
     transitionGameState({}, splash)
 end
 
+-- loads map data and tiles into map and tiles tables
 function loadMap(path, entryX, entryY)
     local tiledMap = require(path) 
 
@@ -41,16 +42,28 @@ function loadMap(path, entryX, entryY)
         end
     end
     
-    -- parse tileset
-    if #tiledMap.tilesets > 1 then print("WARNING: ignoring all but first tileset - only one tileset per map supported") end
-    local tileset = tiledMap.tilesets[1]
+    -- parse tilesets
+    for _, tileset in pairs(tiledMap.tilesets) do
 
-    spritesheet = love.graphics.newImage(tileset.image)
-    for j = 0, tileset.imageheight, tileset.tileheight + tileset.spacing do
-        for i = 0, tileset.imagewidth, tileset.tilewidth + tileset.spacing do
-            table.insert(tiles, love.graphics.newQuad(i, j, tileset.tilewidth, tileset.tileheight, tileset.imagewidth, tileset.imageheight))
+        -- tileset based on spritesheet
+        if tileset.image then
+            local spritesheet = love.graphics.newImage(tileset.image)
+
+            for j = 0, tileset.imageheight, tileset.tileheight + tileset.spacing do
+                for i = 0, tileset.imagewidth, tileset.tilewidth + tileset.spacing do
+                    table.insert(sprites, spritesheet)
+                    quads[#sprites] = love.graphics.newQuad(i, j, tileset.tilewidth, tileset.tileheight, tileset.imagewidth, tileset.imageheight)
+                end
+            end
+
+        -- tileset based on collection of sprites
+        else
+            for _, tile in pairs(tileset.tiles) do
+                table.insert(sprites, love.graphics.newImage(tile.image))
+            end
         end
     end
+
 
     -- used for bounds checking
     worldSizeX = #map[1]
