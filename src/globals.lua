@@ -1,9 +1,11 @@
 ----------------------
 -- global variables --
 ----------------------
-map = {}
-quads = {}
-sprites = {}
+map = {} -- list of 2d arrays representing each layer of the map
+quads = {} -- for spritesheets: quads[i] = section of sprites[i] that cotains sprite i
+sprites = {} -- sprites[i] = sprite or spritesheet that contains sprite i
+terrain = {} -- terrain[i] = terrain type of sprite i
+
 objects = {}
 drawBuffer = {}
 

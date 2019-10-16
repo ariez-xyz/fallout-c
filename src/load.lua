@@ -49,8 +49,8 @@ function loadMap(path, entryX, entryY)
         if tileset.image then
             local spritesheet = love.graphics.newImage(tileset.image)
 
-            for j = 0, tileset.imageheight, tileset.tileheight + tileset.spacing do
-                for i = 0, tileset.imagewidth, tileset.tilewidth + tileset.spacing do
+            for j = 0, tileset.imageheight - 1, tileset.tileheight + tileset.spacing do -- -1 because indices are inclusive...
+                for i = 0, tileset.imagewidth - 1, tileset.tilewidth + tileset.spacing do -- so this might break 1-pixel tiles :)
                     table.insert(sprites, spritesheet)
                     quads[#sprites] = love.graphics.newQuad(i, j, tileset.tilewidth, tileset.tileheight, tileset.imagewidth, tileset.imageheight)
                 end
@@ -62,8 +62,13 @@ function loadMap(path, entryX, entryY)
                 table.insert(sprites, love.graphics.newImage(tile.image))
             end
         end
-    end
 
+        for _, tile in pairs(tileset.tiles) do
+            if tile.id and tile.type then
+                terrain[tile.id] = tile.type
+            end
+        end
+    end
 
     -- used for bounds checking
     worldSizeX = #map[1]

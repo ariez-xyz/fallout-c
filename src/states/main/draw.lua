@@ -45,6 +45,7 @@ return {
                         originOffset 
                     )
 
+
                     -- draw error sprite for unknown tiles/bullshit values
                     if tileid == UNKNOWN_TILE or tileid >= #sprites then
                         love.graphics.draw(flyweights.missingSprite, transform)
